@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Користувачи:</title>
+</head>
+<body>
+<h1>Користувачи:</h1>
+<a href="new">Додати нового</a>
+<div th:each="user : ${listUsers}">
+    <a th:text="${user.toString()}">Some text</a>
+    <a href="/delete/" th:method="GET" th:href="@{'/delete/' + ${user.getId()} }">Видалити</a>
+    <a href="/update/" th:method="GET" th:href="@{'/update/' + ${user.getId()} }">Зминити</a>
+</div>
+</body>
+</html>
