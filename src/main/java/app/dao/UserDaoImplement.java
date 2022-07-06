@@ -16,34 +16,34 @@ public class UserDaoImplement implements UserDao {
     public UserDaoImplement() {}
 
     @Override
-    public List<User> getListUsers() {
+    public List<User> pullListUsers() {
         return manager.createQuery("FROM User", User.class).getResultList();
     }
 
     @Override
     @Transactional
-    public void addUser(String name, String surName, int socialNumber) {
-        addUser(new User(name, surName, socialNumber));
+    public void putUser(String name, String surName, int socialNumber) {
+        putUser(new User(name, surName, socialNumber));
     }
 
     @Override
     @Transactional
-    public void addUser(User user) {
+    public void putUser(User user) {
         manager.merge(user);
     }
 
     @Override
-    public void deleteUser(long id) {
-        manager.remove(getUser(id));
+    public void removeUser(long id) {
+        manager.remove(pullUser(id));
     }
 
     @Override
-    public void changeUser(User user) {
+    public void updateUser(User user) {
         manager.merge(user);
     }
 
     @Override
-    public User getUser(long id) {
+    public User pullUser(long id) {
         return manager.find(User.class, id);
     }
 }

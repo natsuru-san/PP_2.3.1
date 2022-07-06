@@ -31,22 +31,22 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/delete/{id}")
+    //Довелося додати кілька методів. При єдиному методі DELETE вискакує помилка #405
+    @RequestMapping(path = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
     @Transactional
-    public String deleteUser(@PathVariable String id) {
-        userService.deleteUser(Long.parseLong(id));
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
         return "redirect:/";
     }
 
     @GetMapping("/update/{id}")
     @Transactional
     public String updateUser(@PathVariable long id, Model model) {
-        User user = userService.getUser(id);
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.getUser(id));
         return "single_user";
     }
 
-    @PostMapping("/change")
+    @PatchMapping("/change")
     @Transactional
     public String changeUser(@ModelAttribute User user) {
         userService.changeUser(user);
