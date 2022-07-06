@@ -31,8 +31,8 @@ public class UserController {
         return "redirect:/";
     }
 
-    //Довелося додати кілька методів. При єдиному методі DELETE вискакує помилка #405
-    @RequestMapping(path = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    //Цей метод контролера треба використовувати через кнопку в шаблоні html, інакше помилка #405
+    @DeleteMapping("/delete/{id}")
     @Transactional
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
